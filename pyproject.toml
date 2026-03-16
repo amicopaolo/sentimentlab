@@ -1,0 +1,83 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sentimentlab"
+version = "0.1.0"
+description = "A Python library for sentiment-driven financial analysis: OHLCV formatting, sentiment-price correlation, statistical tests and backtesting"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Paolo Amico", email = "paolo.amicopk@gmail.com" }]
+keywords = ["finance", "sentiment-analysis", "finbert", "market-data", "ohlcv", "backtesting", "granger", "pandas", "yfinance"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Typing :: Typed",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    "statsmodels>=0.14.0",
+    "pytz>=2023.3",
+    "python-dateutil>=2.8.2",
+]
+
+[project.optional-dependencies]
+yfinance = ["yfinance>=0.2.0"]
+full = [
+    "yfinance>=0.2.0",
+    "requests>=2.31.0",
+    "rich>=13.0.0",
+    "matplotlib>=3.7.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "pandas-stubs>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/paolo-amicopk/sentimentlab"
+Repository = "https://github.com/paolo-amicopk/sentimentlab"
+"Bug Tracker" = "https://github.com/paolo-amicopk/sentimentlab/issues"
+
+[project.scripts]
+sentimentlab = "sentimentlab.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sentimentlab"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/", "tests/", "README.md", "LICENSE"]
+
+[tool.ruff]
+line-length = 88
+src = ["src", "tests"]
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=sentimentlab --cov-report=term-missing"
