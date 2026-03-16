@@ -69,6 +69,7 @@ from sentimentlab.parsers.currency import detect_currency, convert_currency_code
 # ── Utils ─────────────────────────────────────────────────────────────────────
 from sentimentlab.utils.summary import summary
 from sentimentlab.utils.validation import validate_ohlcv
+from sentimentlab.utils.sample_data import make_sample_data
 
 __all__ = [
     # Loaders
@@ -102,6 +103,7 @@ __all__ = [
     # Utils
     "summary",
     "validate_ohlcv",
+    "make_sample_data",
     # Meta
     "__version__",
 ]
